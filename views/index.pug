@@ -1,0 +1,16 @@
+
+extends layout
+
+block content
+  h1= title
+  p have a good day
+  button(type="button", class="btn btn-primary" onclick="update()") Press Me
+  div(id="target") 
+  a(href='lion') Lion
+
+  script. 
+      var client_count=0 
+      function update(){
+        client_count++;
+        document.getElementById("target").innerHTML=`Value now ${client_count}`
+        }
