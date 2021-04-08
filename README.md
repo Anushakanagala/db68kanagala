@@ -4,6 +4,6 @@ The purpose of this assignment is to become familiar with using pug templates to
 
 Heroku server : https://db68kanagala.herokuapp.com/
 
-Class : handbag
+Class : lion
 
-Attributes : Dimensions(String),Color(String),Price(Number)
+Attributes : Name(String),Age(Number),Breed(String)
