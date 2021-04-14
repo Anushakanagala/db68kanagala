@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    h1= title
+
+    - let lionid   = toShow._id
+    - let lionname = toShow.name
+    - let lionage  = toShow.age
+    - let lionbreed = toShow.breed
+
+    div
+        div.row
+            div(class='lionAttr mr-3') lion ID is:
+            div(id="lionid") #{lionid}
+        div.row
+            div(class='lionAttr mr-3') lion Name is:
+            div #{lionname}
+        div.row
+            div(class='lionAttr mr-3') lion age is:
+            div #{lionage}
+        div.row
+            div(class='lionAttr mr-3') lion breed  is:
+            div #{lionbreed}
+       
+        button(class='btn btn-danger btn-md m-auto'  type="Submit" onclick=`deletelion()`) Delete
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel  
+
+    script.
+        function cancel() {   
+            // Go back to the home page for the costume collection     
+            window.location.href='/lion'   
+        }
+
+    script.
+        function deletelion() {
+            let value=document.getElementById("lionid").innerHTML;
+            console.log(value)
+            // TODO do something here to show user that form is being submitted
+            fetch('/resource/lion/' + value, {
+                method: 'DELETE'
+            }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Delete succeded")
+                    // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Delete failed " + error )
+            });
+        };

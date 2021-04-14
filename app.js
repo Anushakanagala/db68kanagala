@@ -31,7 +31,7 @@ async function recreateDB(){
   let instance3 = new lion({name:"lara",age:"23",breed:"American"});
   instance3.save( function(err,doc) {
   if(err) return console.error(err);
-  console.log("Second object saved")
+  console.log("Third object saved")
   });
   }
   let reseed = true;

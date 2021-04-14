@@ -4,20 +4,20 @@ exports.lion_list = async function (req, res) {
     // List of all lion
     res.send('NOT IMPLEMENTED: lion list');
 };
-exports.lion_list = async function(req, res) {
-    try{
-    thelion = await lion.find();
-    res.send(thelion);
-    }
-    catch(err){
-    res.error(500,`{"error": ${err}}`);
-    }
-    };
-// for a specific lion.
-exports.lion_detail = async function(req, res) {
-    console.log("detail"  + req.params.id)
+exports.lion_list = async function (req, res) {
     try {
-        result = await lion.findById( req.params.id)
+        thelion = await lion.find();
+        res.send(thelion);
+    }
+    catch (err) {
+        res.error(500, `{"error": ${err}}`);
+    }
+};
+// for a specific lion.
+exports.lion_detail = async function (req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await lion.findById(req.params.id)
         res.send(result)
     } catch (error) {
         res.status(500)
@@ -36,28 +36,28 @@ exports.lion_create_post = async function (req, res) {
     document.name = req.body.name;
     document.age = req.body.age;
     document.breed = req.body.breed;
-    try{
+    try {
         let result = await document.save();
         res.send(result);
-        }
-        catch(err){
-        res.error(500,`{"error": ${err}}`);
-        }
-    };
+    }
+    catch (err) {
+        res.error(500, `{"error": ${err}}`);
+    }
+};
 // Handle lion delete form on DELETE.
-exports.lion_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: lion delete DELETE ' + req.params.id);
+exports.lion_delete = function (req, res) {
+    res.send('NOT IMPLEMENTED: lion delete DELETE ' + req.params.id);
 };
 // Handle lion update form on PUT.
 // Handle lion update form on PUT.
-exports.lion_update_put = async function(req, res) {
+exports.lion_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
     try {
-        let toUpdate = await lion.findById( req.params.id)
+        let toUpdate = await lion.findById(req.params.id)
         // Do updates of properties
-        if(req.body.name) toUpdate.name = req.body.name;
-        if(req.body.age) toUpdate.age = req.body.age;
-        if(req.body.breed) toUpdate.breed = req.body.breed;
+        if (req.body.name) toUpdate.name = req.body.name;
+        if (req.body.age) toUpdate.age = req.body.age;
+        if (req.body.breed) toUpdate.breed = req.body.breed;
         let result = await toUpdate.save();
         console.log("Sucess " + result)
         res.send(result)
@@ -70,12 +70,84 @@ exports.lion_update_put = async function(req, res) {
 
 // VIEWS
 // Handle a show all view
-exports.lion_view_all_Page = async function(req, res) {
+exports.lion_view_all_Page = async function (req, res) {
+    try {
+        thelions = await lion.find();
+        res.render('lions', { title: 'lion Search Results', results: thelions });
+    }
+    catch (err) {
+        res.error(500, `{"error": ${err}}`);
+    }
+};
+
+// Handle lion delete on DELETE.
+exports.lion_delete = async function (req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await lion.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
+};
+
+// Handle a show one view with id specified by query
+exports.lion_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        result = await lion.findById(req.query.id)
+        res.render('liondetail',
+            { title: 'lion Detail', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+// Handle building the view for creating a lion.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.lion_create_Page =  function(req, res) {
+    console.log("create view")
     try{
-    thelions = await lion.find();
-    res.render('lions', { title: 'lion Search Results', results: thelions });
+        res.render('lioncreate', { title: 'lion Create'});
     }
     catch(err){
-    res.error(500,`{"error": ${err}}`);
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
     }
-    };
+};
+
+// Handle building the view for updating a lion.
+// query provides the id
+exports.lion_update_Page =  async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+        let result = await lion.findById(req.query.id)
+        res.render('lionupdate', { title: 'lion Update', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+// Handle a delete one view with id from query
+exports.lion_delete_Page = async function(req, res) {
+    console.log("Delete view for id "  + req.query.id)
+    try{
+        result = await lion.findById(req.query.id)
+        res.render('liondelete', { title: 'lion Delete', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+
+
+

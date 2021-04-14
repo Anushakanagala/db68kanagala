@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  h1= title
+
+  - let lionid = toShow._id
+  - let lionname = toShow.name
+  - let lionage = toShow.age
+  - let lionbreed = toShow.breed
+  
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{lionid}
+  - let actionid = "/resource/lion/" + lionid
+  form(id='lionForm', action= actionid, method="PUT")
+    div.form-group
+        label.lionAttr(for='lionname') lion name
+        input#liontype(type='text', name='name', value= lionname )
+    div.form-group
+        label.lionAttr(for='age') lion age
+        input#size(type='number', name='age', value= lionage )
+    div.form-group
+        label.lionAttr(for='breed') lion breed
+        input#cost(type='text', name='breed', value= lionbreed )
+    input(type="submit")
+
+  script.
+    document.forms['lionForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Update failed " + error )
+      });
+    });
+

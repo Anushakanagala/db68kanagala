@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+
+  - let lionid = toShow._id
+  - let lionname = toShow.name
+  - let lionage = toShow.age
+  - let lionbreed = toShow.breed
+  div
+    div.row
+      div(class='lionAttr mr-3') lion ID is:
+      div #{lionid}
+    div.row
+      div(class='lionAttr mr-3') lion Name is:
+      div #{lionname}
+    div.row
+      div(class='lionAttr mr-3') lion Age is:
+      div #{lionage}
+    div.row
+      div(class='lionAttr mr-3') lion breed is:
+      div #{lionbreed}
+
+
+
