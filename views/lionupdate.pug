@@ -3,30 +3,34 @@ extends layout
 block content
   h1= title
 
-  - let lionid = toShow._id
-  - let lionname = toShow.name
-  - let lionage = toShow.age
-  - let lionbreed = toShow.breed
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let lionid = toShow._id
+    - let lionname = toShow.name
+    - let lionage = toShow.age
+    - let lionbreed = toShow.breed
   
-  div.row(class='mb-2')
-    div.mr-1 ID is
-    div #{lionid}
-  - let actionid = "/resource/lion/" + lionid
-  form(id='lionForm', action= actionid, method="PUT")
-    div.form-group
-        label.lionAttr(for='lionname') lion name
-        input#liontype(type='text', name='name', value= lionname )
-    div.form-group
-        label.lionAttr(for='age') lion age
-        input#size(type='number', name='age', value= lionage )
-    div.form-group
-        label.lionAttr(for='breed') lion breed
-        input#cost(type='text', name='breed', value= lionbreed )
-    input(type="submit")
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{lionid}
+    - let actionid = "/resource/lion/" + lionid
+    form(id='lionForm', action= actionid, method="PUT")
+      div.form-group
+          label.lionAttr(for='name') lion name
+          input#name(type='text', name='name', value= name )
+      div.form-group
+          label.lionAttr(for='age') lion age
+          input#age(type='number', name='age', value= age )
+      div.form-group
+          label.lionAttr(for='breed') lion breed
+          input#breed(type='text', name='breed', value= breed )
+      input(type="submit")
 
   script.
     document.forms['lionForm'].addEventListener('submit', (event) => {
       event.preventDefault();
+      console.log(event.target)
       // TODO do something here to show user that form is being submitted
       fetch(event.target.action, {
         method: 'PUT',
@@ -41,4 +45,3 @@ block content
         alert("Update failed " + error )
       });
     });
-

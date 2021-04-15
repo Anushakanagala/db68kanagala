@@ -7,6 +7,50 @@ a {
   color: #00B7FF;
 }
 .lionAttr {
-  background-color: aquamarine;
-  width: 120px;
+  background-color: rgb(244, 253, 165);
+  width: 180px;
+  margin: 4px;
+  text-align: center;
+  color: white;
+  padding: 9px;
+  border-radius: 6px;
+  font-weight: bolder;
+
+}
+
+.newAttr {
+  width: 180px;
+  margin: 4px;
+  text-align: center;
+  padding: 9px;
+  border-radius: 6px;
+  font-weight: bolder;
+
+}
+
+#newtitle{
+  color: #39722b;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: underline;
+}
+
+.newvalues{
+  margin-right: 3px;
+  margin-bottom: 0;
+  padding: 9px;
+  justify-content:center;
+  font-weight: bold;
+  border-bottom: 2px solid rgb(202, 98, 57);
+  border-left: 2px solid  rgb(228, 136, 50);
+  background-color: rgb(130, 73, 148);
+  border-radius: 2px;
+}
+.specialstyles{
+    border-top: 2px solid rgb(13, 55, 119);
+    width: 50%;
+}
+.newvalues:hover{
+  background-color: rgb(105, 238, 231);
+  color: black;
 }
