@@ -72,8 +72,8 @@ exports.lion_update_put = async function (req, res) {
 // Handle a show all view
 exports.lion_view_all_Page = async function (req, res) {
     try {
-        thelions = await lion.find();
-        res.render('lions', { title: 'lion Search Results', results: thelions });
+        thelion = await lion.find();
+        res.render('lion', { title: 'lion Search Results', results: thelion });
     }
     catch (err) {
         res.error(500, `{"error": ${err}}`);

@@ -4,9 +4,11 @@ block content
   h1= title
     - let lion  = results
   div(class="container-fluid mt-3")
-  div(class="row")
+  div(class="row m-1")
     each i ,index in lion  
-      div(class="col-sm-4")  #{i.name} - #{i.age} -#{i.breed}
+     - let destination = `dispatch(\"/lion/update?id=${i._id}\")`
+       div(class="col-sm-4")  #{i.name} - #{i.age} -#{i.breed}
+       button.btn( class="btn-primary ml-1", onclick= destination) Update
      
   script.
      
@@ -14,3 +16,7 @@ block content
       {
         alert(`You purchased Item ${itemNo+1}`)
       }
+      function dispatch(path)
+      {
+        window.location.href=path
+      }  
