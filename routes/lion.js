@@ -9,8 +9,19 @@ router.get('/detail', lion_controlers.lion_view_one_Page);
 /* GET create lion page */
 router.get('/create', lion_controlers.lion_create_Page);
 
+// A little function to check if we have an authorized user and continue on
+// or
+// redirect to login.
+const secured = (req, res, next) => {
+    if (req.user){
+    return next();
+    }
+    req.session.returnTo = req.originalUrl;
+    res.redirect("/login");
+    }
+
 /* GET create update page */
-router.get('/update', lion_controlers.lion_update_Page);
+router.get('/update',secured, lion_controlers.lion_update_Page);
 
 /* GET create lion page */
 router.get('/delete', lion_controlers.lion_delete_Page);
