@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  button.btn( class="btn-primary ml-1", onclick= destination) View
   h1= title
+  - let destination1 = `dispatch(\"/lion/update?")`
+  button.btn( class="btn-primary ml-1", onclick= destination1) View
   
     - let lion  = results
   div(class="container-fluid mt-3")
