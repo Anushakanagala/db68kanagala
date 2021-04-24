@@ -1,7 +1,11 @@
 const mongoose = require("mongoose")
 const lionSchema = mongoose.Schema({
 name: String,
-breed: String,
+breed: {
+    type:String,
+    required:[true]
+},
+
 age:{
     type:Number,
     min:1,

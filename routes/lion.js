@@ -7,7 +7,7 @@ router.get('/', lion_controlers.lion_view_all_Page );
 router.get('/detail', lion_controlers.lion_view_one_Page);
 
 /* GET create lion page */
-router.get('/create', lion_controlers.lion_create_Page);
+router.get('/create', secured, lion_controlers.lion_create_Page);
 
 // A little function to check if we have an authorized user and continue on
 // or
@@ -24,11 +24,8 @@ const secured = (req, res, next) => {
 router.get('/update',secured, lion_controlers.lion_update_Page);
 
 /* GET create lion page */
-router.get('/delete', lion_controlers.lion_delete_Page);
-
-
-
-
-
+router.get('/delete', secured, lion_controlers.lion_delete_Page);
 
 module.exports = router;
+
+
