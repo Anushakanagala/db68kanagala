@@ -3,7 +3,8 @@ const lionSchema = mongoose.Schema({
 name: String,
 breed: {
     type:String,
-    required:[true]
+    minLength: 5,
+    maxLength: 500
 },
 
 age:{
